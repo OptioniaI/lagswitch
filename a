@@ -1,0 +1,78 @@
+local LagSwitch = Instance.new("ScreenGui")
+local main = Instance.new("Frame")
+local on = Instance.new("TextButton")
+local off = Instance.new("TextButton")
+local loop = Instance.new("TextBox")
+
+LagSwitch.Name = "LagSwitch"
+LagSwitch.Parent = game.CoreGui
+LagSwitch.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+main.Name = "main"
+main.Parent = LagSwitch
+main.Active = true
+main.Draggable = true
+main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+main.BorderColor3 = Color3.fromRGB(255, 255, 255)
+main.Position = UDim2.new(0.496253133, 0, 0.374692887, 0)
+main.Size = UDim2.new(0, 180, 0, 72)
+
+on.Name = "on"
+on.Parent = main
+on.BackgroundColor3 = Color3.fromRGB(206, 255, 211)
+on.BorderColor3 = Color3.fromRGB(255, 255, 255)
+on.Position = UDim2.new(0.205555558, 0, 0.444444448, 0)
+on.Size = UDim2.new(0, 41, 0, 18)
+on.Font = Enum.Font.SourceSans
+on.Text = "ON"
+on.TextColor3 = Color3.fromRGB(0, 0, 0)
+on.TextSize = 14.000
+
+off.Name = "off"
+off.Parent = main
+off.BackgroundColor3 = Color3.fromRGB(254, 177, 173)
+off.BorderColor3 = Color3.fromRGB(255, 255, 255)
+off.Position = UDim2.new(0.611111104, 0, 0.444444418, 0)
+off.Size = UDim2.new(0, 42, 0, 18)
+off.Font = Enum.Font.SourceSans
+off.Text = "OFF"
+off.TextColor3 = Color3.fromRGB(0, 0, 0)
+off.TextSize = 14.000
+
+loop.Name = "loop"
+loop.Parent = main
+loop.BackgroundColor3 = Color3.fromRGB(213, 238, 255)
+loop.Position = UDim2.new(0.305717985125, 0, 0.0972222239, 0)
+loop.Size = UDim2.new(0, 70, 0, 16)
+loop.Font = Enum.Font.SourceSans
+loop.PlaceholderColor3 = Color3.fromRGB(0, 0, 0)
+loop.PlaceholderText = "NUM:"
+loop.Text = ""
+loop.TextColor3 = Color3.fromRGB(0, 0, 0)
+loop.TextSize = 14.000
+
+on.MouseButton1Click:Connect(function()
+    local hrp = game.Players.LocalPlayer.Character.HumanoidRootPart
+    local playe = game.Players.LocalPlayer.Character
+    local f = Instance.new("Part", playe)
+    local g = Instance.new("Weld", f)
+
+    f.Name = "Lag Switch"
+    f.CanCollide = false
+    f.Transparency = 1
+    f.Position = playe.HumanoidRootPart.Position
+    wait()
+    g.Part0 = f
+    g.Part1 = playe.HumanoidRootPart
+    f.Size = Vector3.new(25, 1, 25)
+    while _G.LAG == true do
+        wait(delay)
+        f.CFrame = hrp.CFrame
+    end
+end)
+
+off.MouseButton1Click:Connect(function()
+    _G.LAG = false
+    wait(0.1)
+    game.Players.LocalPlayer.Character["Lag Switch"]:Destroy()
+end)
